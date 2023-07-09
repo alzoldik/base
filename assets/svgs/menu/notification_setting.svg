@@ -1,0 +1,12 @@
+<svg id="Hicon_Bold_Notification_1" data-name="Hicon / Bold / Notification 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fbd08c"/>
+      <stop offset="1" stop-color="#ffae00"/>
+    </linearGradient>
+  </defs>
+  <g id="Notification_1" data-name="Notification 1">
+    <path id="Vector" d="M7.85,0a5.645,5.645,0,0,0-5.6,6.345l.079.635a2.9,2.9,0,0,1-.911,2.492,4.4,4.4,0,0,0-.975,5.155l.1.213A4.72,4.72,0,0,0,4.791,17.5h8.221a4.562,4.562,0,0,0,3.1-7.905l-.044-.041A3.134,3.134,0,0,1,15.1,6.869l.065-.517A5.651,5.651,0,0,0,9.553,0Z" transform="translate(3.25 1.25)" fill="url(#linear-gradient)"/>
+    <path id="Vector-2" data-name="Vector" d="M6.533,19.3a.75.75,0,1,0-1.2.9l.3.4a4.125,4.125,0,0,0,6.6,0l.3-.4a.75.75,0,1,0-1.2-.9l-.3.4a2.625,2.625,0,0,1-4.2,0Z" transform="translate(3.25 1.25)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.5" height="22.25" viewBox="0 0 21.5 22.25">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e03e65"/>
+      <stop offset="1" stop-color="#f26083"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_51529" data-name="Group 51529" transform="translate(-23.25 -405.5)">
+    <path id="Vector" d="M4.719,1.336A.75.75,0,0,0,3.782.164l-2.5,2a.75.75,0,0,0,.937,1.171Z" transform="translate(23.25 405.5)" fill="url(#linear-gradient)"/>
+    <path id="Vector-2" data-name="Vector" d="M10.75.75A10.75,10.75,0,1,0,21.5,11.5,10.75,10.75,0,0,0,10.75.75ZM11.5,7.5a.75.75,0,0,0-1.5,0,18.483,18.483,0,0,1,0,3.189c-.18.617-.72-.72-.72-.72A.75.75,0,0,0,8.22,11.03l1.5,1.5a1.043,1.043,0,0,0,1.78-.737Z" transform="translate(23.25 405.5)" fill="url(#linear-gradient)"/>
+    <path id="Vector-3" data-name="Vector" d="M11.5,7.5a.75.75,0,0,0-1.5,0,18.483,18.483,0,0,1,0,3.189c-.18.617-.72-.72-.72-.72A.75.75,0,0,0,8.22,11.03l1.5,1.5a1.043,1.043,0,0,0,1.78-.737Z" transform="translate(23.25 405.5)" fill="#fff"/>
+    <path id="Vector-4" data-name="Vector" d="M17.719.164a.75.75,0,0,0-.937,1.171l2.5,2a.75.75,0,0,0,.937-1.171Z" transform="translate(23.25 405.5)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

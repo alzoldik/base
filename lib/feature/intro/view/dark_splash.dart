@@ -1,5 +1,6 @@
 import 'package:base/app/app_event.dart';
 import 'package:base/app/app_state.dart';
+import 'package:base/config/colors/dark_colors.dart';
 import 'package:base/utility/extintions.dart';
 import 'package:base/utility/route.dart';
 import 'package:base/widgets/lottie.dart';
@@ -8,12 +9,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/splash_bloc.dart';
 import 'onbording.dart';
 
-class Splash extends StatelessWidget {
-  const Splash({super.key});
+class DarkSplash extends StatelessWidget {
+  const DarkSplash({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: DarkColor.black,
       body: BlocProvider(
         create: (context) => SplashBloc()..add(Click()),
         child: BlocListener<SplashBloc, AppState>(

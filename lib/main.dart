@@ -1,6 +1,6 @@
 import 'package:base/app/app_state.dart';
 import 'package:base/entities/app_settings.dart';
-import 'package:base/feature/intro/view/splash.dart';
+import 'package:base/feature/intro/view/light_splash.dart';
 import 'package:base/utility/keybord_lisenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:base/utility/un_focus.dart';
 import 'bloc/setting/setting_bloc.dart';
 import 'config/themes/themes.dart';
+import 'feature/intro/view/dark_splash.dart';
 import 'services/mobile_settings_service.dart';
 
 final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
                   darkTheme: Themes.darkTheme().themeData,
                   theme: Themes.lightTheme().themeData,
                   themeMode: snapshot.data?.lightTheme == true ? ThemeMode.light : ThemeMode.dark,
-                  home: const Splash(),
+                  home: snapshot.data?.lightTheme == true ? const LightSplash() : const DarkSplash(),
                   builder: (context, child) {
                     return MediaQuery(
                       data: MediaQuery.of(context).copyWith(

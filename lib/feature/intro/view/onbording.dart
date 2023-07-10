@@ -25,7 +25,9 @@ class OnBording extends StatelessWidget {
               builder: (context, snapshot) {
                 return IconButton(
                   onPressed: () {
-                    context.read<SettingsBloc>().darkMode(!context.read<SettingsBloc>().currentSettings.lightTheme);
+                    context.read<SettingsBloc>().darkMode(
+                          !context.read<SettingsBloc>().currentSettings.lightTheme,
+                        );
                   },
                   icon: snapshot.data?.lightTheme == true ? const Icon(Icons.dark_mode) : const Icon(Icons.light_mode),
                   iconSize: 50,
@@ -55,7 +57,6 @@ class OnBording extends StatelessWidget {
                         SizedBox(height: 16.h),
                         Text(
                           context.L.join_our_community_and_now_for_free,
-                          // "Join our community and now for free",
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 14,
@@ -68,7 +69,6 @@ class OnBording extends StatelessWidget {
                     tag: "btn",
                     child: CustomBtn(
                       text: context.L.get_start,
-                      // "Get Started",
                       onPressed: () {
                         push(const LoginView());
                       },
@@ -81,7 +81,6 @@ class OnBording extends StatelessWidget {
                     },
                     child: Text(
                       context.L.language,
-                      // "Join our community and now for free",
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         fontSize: 16,
@@ -89,8 +88,7 @@ class OnBording extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16.h),
-                  SizedBox(height: 72.h)
+                  SizedBox(height: 88.h)
                 ],
               ),
             ),

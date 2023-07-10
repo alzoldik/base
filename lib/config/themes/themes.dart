@@ -44,11 +44,11 @@ ThemeData _buildLightTheme() {
     textTheme: Typography.material2018(
       platform: TargetPlatform.iOS,
     ).black,
-    primaryIconTheme: IconThemeData(
-      color: Colors.grey[800],
+    primaryIconTheme: const IconThemeData(
+      color: LightColor.grey,
     ),
     buttonTheme: base.buttonTheme.copyWith(
-      buttonColor: Colors.orange,
+      buttonColor: LightColor.secondary,
     ),
     iconTheme: base.iconTheme.copyWith(
       color: LightColor.primary,
@@ -62,7 +62,7 @@ ThemeData _buildLightTheme() {
       centerTitle: true,
       elevation: 0,
       backgroundColor: LightColor.offWhite,
-      foregroundColor: Colors.black,
+      foregroundColor: LightColor.primary,
       titleTextStyle: const TextStyle(
         fontSize: 16,
         color: LightColor.primary,
@@ -123,9 +123,7 @@ ThemeData _buildLightTheme() {
       actionTextColor: LightColor.secondary,
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.grey[800],
-      ),
+      style: OutlinedButton.styleFrom(foregroundColor: LightColor.grey),
     ),
     radioTheme: RadioThemeData(
       fillColor: MaterialStateProperty.all(
@@ -151,7 +149,7 @@ ThemeData _buildDarktheme() {
     primaryColorDark: DarkColor.primary.withOpacity(1),
     secondaryHeaderColor: DarkColor.secondary,
     canvasColor: DarkColor.offWhite,
-    scaffoldBackgroundColor: DarkColor.offWhite,
+    scaffoldBackgroundColor: DarkColor.black,
     bottomAppBarTheme: const BottomAppBarTheme(color: DarkColor.offWhite),
     cardColor: DarkColor.offWhite,
     dividerColor: DarkColor.grey,
@@ -167,12 +165,12 @@ ThemeData _buildDarktheme() {
     hintColor: DarkColor.primary,
     primaryTextTheme: Typography.material2018(
       platform: TargetPlatform.iOS,
-    ).black,
+    ).white,
     textTheme: Typography.material2018(
       platform: TargetPlatform.iOS,
-    ).black,
-    primaryIconTheme: IconThemeData(
-      color: Colors.grey[800],
+    ).white,
+    primaryIconTheme: const IconThemeData(
+      color: DarkColor.grey,
     ),
     buttonTheme: base.buttonTheme.copyWith(
       buttonColor: Colors.orange,
@@ -186,30 +184,53 @@ ThemeData _buildDarktheme() {
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     appBarTheme: base.appBarTheme.copyWith(
-      backgroundColor: const Color(0xff222222),
+      backgroundColor: DarkColor.primary,
       foregroundColor: Colors.white,
       shadowColor: const Color(0xff222222),
       elevation: 1.0,
       toolbarHeight: 38,
       systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
         systemNavigationBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: const Color(0xff222222),
+        systemNavigationBarColor: DarkColor.offWhite,
         statusBarIconBrightness: Brightness.light,
       ),
     ),
-    pageTransitionsTheme: const PageTransitionsTheme(builders: {
-      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-    }),
-    snackBarTheme: base.snackBarTheme.copyWith(actionTextColor: Colors.orange),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        foregroundColor: const Color(0xffffffff),
-        side: const BorderSide(
-          color: Color(0xffffffff),
-          style: BorderStyle.solid,
-        ),
+    inputDecorationTheme: InputDecorationTheme(
+      isDense: true,
+      hintStyle: const TextStyle(
+        fontSize: 12,
+        color: DarkColor.grey,
       ),
+      labelStyle: const TextStyle(
+        fontSize: 2,
+        color: DarkColor.primary,
+      ),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 16,
+      ),
+      floatingLabelStyle: const TextStyle(
+        fontSize: 14,
+        color: DarkColor.primary,
+      ),
+      alignLabelWithHint: true,
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      fillColor: DarkColor.grey.withOpacity(0.1),
+      filled: true,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
+      ),
+    ),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
+    snackBarTheme: base.snackBarTheme.copyWith(actionTextColor: DarkColor.secondary),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(foregroundColor: DarkColor.grey),
     ),
   );
 }

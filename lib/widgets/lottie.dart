@@ -7,10 +7,12 @@ class LottieFile extends StatelessWidget {
     this.height,
     this.width,
     required this.name,
+    this.fit = BoxFit.cover,
   });
   final double? height;
   final double? width;
   final String name;
+  final BoxFit fit;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,9 @@ class LottieFile extends StatelessWidget {
         "assets/jsons/$name.json",
         height: height,
         width: width,
+        fit: fit,
+        options: LottieOptions(enableMergePaths: true),
+        filterQuality: FilterQuality.high,
       ),
     );
   }

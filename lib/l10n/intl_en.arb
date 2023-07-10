@@ -4,5 +4,14 @@
     "description": "Full title for the application",
     "type": "text",
     "placeholders": {}
-  }
+  },
+  "loading": "Loading...",
+  "welcome_to_Razeen": "Welcome to Razeen",
+  "join_our_community_and_now_for_free": "Join our community and now for free",
+  "get_start": "Get Started",
+  "signup": "Sign Up",
+  "signin": "Sign In",
+  "log_in_and_start_your_educational_journey": "Log in and start your educational journey",
+  "phone_number": "Phone Number",
+  "login": "Login"
 }

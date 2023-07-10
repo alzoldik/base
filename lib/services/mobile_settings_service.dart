@@ -1,9 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import '../entitis/app_settings.dart';
+import '../entities/app_settings.dart';
 import 'setting_services.dart';
 
-/// An implementation [SettingService] for mobile devices backed by
-/// shared preferences.
 class MobileSettingsService extends SettingsService {
   static late SharedPreferences _sharedPreferences;
 

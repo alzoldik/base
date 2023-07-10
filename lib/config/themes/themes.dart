@@ -63,7 +63,11 @@ ThemeData _buildLightTheme() {
       elevation: 0,
       backgroundColor: LightColor.offWhite,
       foregroundColor: Colors.black,
-      titleTextStyle: const TextStyle(fontSize: 16, color: LightColor.primary, fontWeight: FontWeight.w400),
+      titleTextStyle: const TextStyle(
+        fontSize: 16,
+        color: LightColor.primary,
+        fontWeight: FontWeight.w600,
+      ),
       systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
         systemNavigationBarColor: Colors.white,
         statusBarColor: LightColor.offWhite,
@@ -71,19 +75,38 @@ ThemeData _buildLightTheme() {
         statusBarIconBrightness: Brightness.dark,
       ),
     ),
-    pageTransitionsTheme: const PageTransitionsTheme(builders: {
-      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-    }),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
     inputDecorationTheme: InputDecorationTheme(
       isDense: true,
-      hintStyle: const TextStyle(fontSize: 12, color: LightColor.grey),
-      labelStyle: const TextStyle(fontSize: 14, color: LightColor.primary),
-      floatingLabelStyle: const TextStyle(fontSize: 14, color: LightColor.primary),
+      hintStyle: const TextStyle(
+        fontSize: 12,
+        color: LightColor.grey,
+      ),
+      labelStyle: const TextStyle(
+        fontSize: 2,
+        color: LightColor.primary,
+      ),
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 16,
+      ),
+      floatingLabelStyle: const TextStyle(
+        fontSize: 14,
+        color: LightColor.primary,
+      ),
       alignLabelWithHint: true,
       floatingLabelBehavior: FloatingLabelBehavior.always,
       fillColor: LightColor.grey.withOpacity(0.1),
       filled: true,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
+      ),
     ),
     dataTableTheme: DataTableThemeData(
       dataRowColor: MaterialStateProperty.all(
@@ -102,6 +125,11 @@ ThemeData _buildLightTheme() {
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: Colors.grey[800],
+      ),
+    ),
+    radioTheme: RadioThemeData(
+      fillColor: MaterialStateProperty.all(
+        LightColor.primary,
       ),
     ),
   );

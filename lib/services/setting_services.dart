@@ -1,4 +1,4 @@
-import '../entitis/app_settings.dart';
+import '../entities/app_settings.dart';
 
 abstract class SettingsService {
   AppSettings get settings;

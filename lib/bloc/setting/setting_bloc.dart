@@ -8,38 +8,44 @@ import '../../services/setting_services.dart';
 class SettingsBloc extends Bloc<AppEvent, AppState> {
   final SettingsService _settingsService;
 
-  final BehaviorSubject<AppSettings> _settings =
-      BehaviorSubject<AppSettings>.seeded(AppSettings.sensibleDefaults());
+  final BehaviorSubject<AppSettings> _settings = BehaviorSubject<AppSettings>.seeded(AppSettings.sensibleDefaults());
   final BehaviorSubject<bool> _darkMode = BehaviorSubject<bool>();
   final BehaviorSubject<bool> _isArabic = BehaviorSubject<bool>();
 
-  SettingsBloc(super.initialState, this._settingsService) {
+  void Function(bool) get darkMode => _darkMode.add;
+
+  void Function(bool) get isArabic => _isArabic.add;
+
+  void Function(AppSettings) get updateSetting => _settings.add;
+
+  Stream<AppSettings> get settings => _settings.stream;
+
+  AppSettings get currentSettings => _settings.value;
+
+  SettingsBloc(this._settingsService) : super(Start()) {
     _init();
   }
 
   void _init() {
-    var themeLightMode = _settingsService.themeLightMode;
-    var isArabic = _settingsService.isArabic;
-    var s = AppSettings(lightTheme: themeLightMode, isArabic: isArabic);
-    _settings.add(s);
-    _darkMode.listen((bool darkMode) {
-      themeLightMode = darkMode;
-      _settings.add(s.copy(lightTheme: themeLightMode, isArabic: isArabic));
-      _settingsService.themeLightMode = darkMode;
-    });
-    _isArabic.listen((bool lang) {
-      isArabic = lang;
-      _settings.add(s.copy(isArabic: lang, lightTheme: themeLightMode));
-      _settingsService.isArabic = lang;
-    });
+    updateSetting(
+      AppSettings(
+        lightTheme: _settingsService.themeLightMode,
+        isArabic: _settingsService.isArabic,
+      ),
+    );
+    _darkMode.listen(
+      (bool lightModel) {
+        _settingsService.themeLightMode = lightModel;
+        updateSetting(currentSettings.copy(lightTheme: lightModel));
+      },
+    );
+    _isArabic.listen(
+      (bool isArabic) {
+        _settingsService.isArabic = isArabic;
+        updateSetting(currentSettings.copy(isArabic: isArabic));
+      },
+    );
   }
-
-  Stream<AppSettings> get settings => _settings.stream;
-
-  void Function(bool) get darkMode => _darkMode.add;
-  void Function(bool) get isArabic => _isArabic.add;
-
-  AppSettings get currentSettings => _settings.value;
 
   @override
   Future<void> close() {

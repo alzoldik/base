@@ -19,7 +19,7 @@ class Splash extends StatelessWidget {
         child: BlocListener<SplashBloc, AppState>(
           listener: (context, state) {
             if (state is Done) {
-              push(const OnBording());
+              pushAndRemoveUntil(const OnBording());
             }
           },
           child: Padding(

@@ -28,20 +28,20 @@ class CustomBtn extends StatelessWidget {
         height: height?.h,
         width: width,
         decoration: BoxDecoration(
-          color: color ?? context.theme.primaryColor,
+          color: color ?? context.color.primary,
           border: Border.all(
-            color: borderColor ?? context.theme.primaryColor,
+            color: borderColor ?? context.color.primary,
           ),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Center(
           child: Text(
             text,
-            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                  fontSize: 16,
-                ),
+            style: context.textTheme.headlineLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: textColor,
+              fontSize: 16,
+            ),
           ),
         ),
       ),

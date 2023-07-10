@@ -23,7 +23,10 @@ class AppSettings implements Copyable<AppSettings> {
   }
 
   @override
-  AppSettings copyWith(AppSettings appSettings) => AppSettings(lightTheme: appSettings.lightTheme, isArabic: appSettings.isArabic);
+  AppSettings copyWith(AppSettings appSettings) => AppSettings(
+        lightTheme: appSettings.lightTheme,
+        isArabic: appSettings.isArabic,
+      );
 }
 
 abstract class Copyable<T> {

@@ -2,8 +2,10 @@ import 'package:base/app/app_state.dart';
 import 'package:base/entities/app_settings.dart';
 import 'package:base/feature/intro/view/light_splash.dart';
 import 'package:base/utility/keybord_lisenter.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:base/utility/un_focus.dart';
@@ -16,8 +18,14 @@ final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await dotenv.load();
   var mobileSettingsService = await MobileSettingsService.instance();
-  runApp(MyApp(mobileSettingsService: mobileSettingsService));
+  runApp(
+    MyApp(
+      mobileSettingsService: mobileSettingsService,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +51,9 @@ class MyApp extends StatelessWidget {
                   showSemanticsDebugger: false,
                   debugShowMaterialGrid: false,
                   navigatorKey: navigator,
-                  locale: snapshot.data?.isArabic == true ? const Locale('ar', 'EG') : const Locale('en', 'US'),
+                  locale: snapshot.data?.isArabic == true
+                      ? const Locale('ar', 'EG')
+                      : const Locale('en', 'US'),
                   localizationsDelegates: const [
                     AppLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,
@@ -55,15 +65,21 @@ class MyApp extends StatelessWidget {
                     Locale('en', 'US'),
                   ],
                   title: 'HCM7',
-                  onGenerateTitle: (context) => AppLocalizations.of(context)!.app_title,
+                  onGenerateTitle: (context) =>
+                      AppLocalizations.of(context)!.app_title,
                   darkTheme: Themes.darkTheme().themeData,
                   theme: Themes.lightTheme().themeData,
-                  themeMode: snapshot.data?.lightTheme == true ? ThemeMode.light : ThemeMode.dark,
-                  home: snapshot.data?.lightTheme == true ? const LightSplash() : const DarkSplash(),
+                  themeMode: snapshot.data?.lightTheme == true
+                      ? ThemeMode.light
+                      : ThemeMode.dark,
+                  home: snapshot.data?.lightTheme == true
+                      ? const LightSplash()
+                      : const DarkSplash(),
                   builder: (context, child) {
                     return MediaQuery(
                       data: MediaQuery.of(context).copyWith(
-                        textScaleFactor: (1 * (MediaQuery.of(context).size.height / 844)),
+                        textScaleFactor:
+                            (1 * (MediaQuery.of(context).size.height / 844)),
                         alwaysUse24HourFormat: false,
                       ),
                       child: Unfocus(child: child),

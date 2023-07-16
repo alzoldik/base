@@ -1,6 +1,5 @@
 import 'package:base/app/app_event.dart';
 import 'package:base/app/app_state.dart';
-import 'package:base/config/colors/light_colors.dart';
 import 'package:base/utility/extintions.dart';
 import 'package:base/utility/route.dart';
 import 'package:base/widgets/lottie.dart';
@@ -15,7 +14,7 @@ class LightSplash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: LightColor.offWhite,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: BlocProvider(
         create: (context) => SplashBloc()..add(Click()),
         child: BlocListener<SplashBloc, AppState>(

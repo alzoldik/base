@@ -18,7 +18,7 @@ class LottieFile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Lottie.asset(
-        "assets/jsons/$name.json",
+        "assets/json/$name.json",
         height: height,
         width: width,
         fit: fit,

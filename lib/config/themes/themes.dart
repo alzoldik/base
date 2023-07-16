@@ -8,7 +8,14 @@ final ThemeData _darkTheme = _buildDarktheme();
 
 ThemeData _buildLightTheme() {
   final base = ThemeData.light();
-
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.white,
+    ),
+  );
   return base.copyWith(
     colorScheme: const ColorScheme.light(
       secondary: LightColor.secondary,
@@ -135,7 +142,14 @@ ThemeData _buildLightTheme() {
 
 ThemeData _buildDarktheme() {
   final base = ThemeData.dark();
-
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+      systemNavigationBarColor: Colors.black,
+    ),
+  );
   return base.copyWith(
     colorScheme: const ColorScheme.light(
       secondary: DarkColor.secondary,
@@ -184,9 +198,10 @@ ThemeData _buildDarktheme() {
     ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     appBarTheme: base.appBarTheme.copyWith(
-      backgroundColor: DarkColor.primary,
+      backgroundColor: DarkColor.black,
       foregroundColor: Colors.white,
       shadowColor: const Color(0xff222222),
+      centerTitle: true,
       elevation: 1.0,
       toolbarHeight: 38,
       systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
@@ -228,7 +243,8 @@ ThemeData _buildDarktheme() {
         TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
       },
     ),
-    snackBarTheme: base.snackBarTheme.copyWith(actionTextColor: DarkColor.secondary),
+    snackBarTheme:
+        base.snackBarTheme.copyWith(actionTextColor: DarkColor.secondary),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(foregroundColor: DarkColor.grey),
     ),

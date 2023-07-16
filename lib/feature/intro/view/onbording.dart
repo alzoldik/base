@@ -14,6 +14,7 @@ class OnBording extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
@@ -26,10 +27,15 @@ class OnBording extends StatelessWidget {
                 return IconButton(
                   onPressed: () {
                     context.read<SettingsBloc>().darkMode(
-                          !context.read<SettingsBloc>().currentSettings.lightTheme,
+                          !context
+                              .read<SettingsBloc>()
+                              .currentSettings
+                              .lightTheme,
                         );
                   },
-                  icon: snapshot.data?.lightTheme == true ? const Icon(Icons.dark_mode) : const Icon(Icons.light_mode),
+                  icon: snapshot.data?.lightTheme == true
+                      ? const Icon(Icons.dark_mode)
+                      : const Icon(Icons.light_mode),
                   iconSize: 50,
                 );
               },
@@ -77,7 +83,10 @@ class OnBording extends StatelessWidget {
                   SizedBox(height: 16.h),
                   GestureDetector(
                     onTap: () {
-                      context.read<SettingsBloc>().isArabic(!context.read<SettingsBloc>().currentSettings.isArabic);
+                      context.read<SettingsBloc>().isArabic(!context
+                          .read<SettingsBloc>()
+                          .currentSettings
+                          .isArabic);
                     },
                     child: Text(
                       context.L.language,

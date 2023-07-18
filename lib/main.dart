@@ -1,8 +1,10 @@
 import 'package:base/app/app_state.dart';
 import 'package:base/entities/app_settings.dart';
 import 'package:base/feature/intro/view/light_splash.dart';
+import 'package:base/services/notification_services.dart';
 import 'package:base/utility/keybord_lisenter.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -19,6 +21,8 @@ final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await NotificationServices().init();
+  FirebaseMessaging.onBackgroundMessage(handelBackgroundMessage);
   await dotenv.load();
   var mobileSettingsService = await MobileSettingsService.instance();
   runApp(

@@ -95,7 +95,7 @@ ThemeData _buildLightTheme() {
         color: LightColor.grey,
       ),
       labelStyle: const TextStyle(
-        fontSize: 2,
+        fontSize: 14,
         color: LightColor.primary,
       ),
       contentPadding: const EdgeInsets.symmetric(
@@ -217,7 +217,7 @@ ThemeData _buildDarktheme() {
         color: DarkColor.grey,
       ),
       labelStyle: const TextStyle(
-        fontSize: 2,
+        fontSize: 14,
         color: DarkColor.primary,
       ),
       contentPadding: const EdgeInsets.symmetric(

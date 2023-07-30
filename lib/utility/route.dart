@@ -20,15 +20,19 @@ pushAndRemoveUntil(Widget child) => Navigator.of(
       (route) => false,
     );
 
-pushReplacement(Widget child) => Navigator.of(navigator.currentContext!).pushReplacement(
-      CustomPageRoute(builder: (context) => child),
+pushReplacement(Widget child) =>
+    Navigator.of(navigator.currentContext!).pushReplacement(
+      CustomPageRoute(
+        builder: (context) => child,
+      ),
     );
 
 pushFade(Widget child) async => Navigator.push(
       navigator.currentContext!,
       PageRouteBuilder(
         pageBuilder: (c, a1, a2) => child,
-        transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+        transitionsBuilder: (c, anim, a2, child) =>
+            FadeTransition(opacity: anim, child: child),
         transitionDuration: const Duration(milliseconds: 600),
       ),
     );
@@ -48,7 +52,8 @@ pushAndRemoveUntilFade(Widget child) async => Navigator.pushAndRemoveUntil(
       navigator.currentContext!,
       PageRouteBuilder(
         pageBuilder: (c, a1, a2) => child,
-        transitionsBuilder: (c, anim, a2, child) => FadeTransition(opacity: anim, child: child),
+        transitionsBuilder: (c, anim, a2, child) =>
+            FadeTransition(opacity: anim, child: child),
         transitionDuration: const Duration(milliseconds: 600),
       ),
       (route) => false,
@@ -62,7 +67,8 @@ pushUp(Widget child) => Navigator.of(navigator.currentContext!).push(
         pageBuilder: (_, __, ___) => child,
       ),
     );
-pushAndRemoveUntilUP(Widget child) => Navigator.of(navigator.currentContext!).pushAndRemoveUntil(
+pushAndRemoveUntilUP(Widget child) =>
+    Navigator.of(navigator.currentContext!).pushAndRemoveUntil(
       PageRouteBuilder(
         opaque: false,
         pageBuilder: (_, __, ___) => child,

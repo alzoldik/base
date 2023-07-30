@@ -25,22 +25,25 @@ class LightSplash extends StatelessWidget {
           },
           child: Padding(
             padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Hero(
-                  tag: "splash",
-                  child: LottieFile(
-                    name: "splash",
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Hero(
+                    tag: "splash",
+                    child: LottieFile(
+                      name: "splash",
+                    ),
                   ),
-                ),
-                Text(
-                  context.L.loading,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    context.L.loading,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

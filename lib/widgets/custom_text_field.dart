@@ -69,7 +69,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
       onChanged: widget.onChanged,
       inputFormatters: widget.keyboardType == TextInputType.number ||
               widget.keyboardType == TextInputType.phone
-          ? <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly]
+          ? <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly,
+            ]
           : widget.inputFormatters, // Only numbers can be entered
       decoration: InputDecoration(
         hintText: widget.hint,

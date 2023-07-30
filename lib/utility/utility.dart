@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -20,9 +21,12 @@ void cprint(
 }) {
   if (kDebugMode) {
     if (errorIn != null) {
-      print('****************************** error ******************************');
-      developer.log('[Error]', time: DateTime.now(), error: data, name: errorIn);
-      print('****************************** error ******************************');
+      print(
+          '****************************** error ******************************');
+      developer.log('[Error]',
+          time: DateTime.now(), error: data, name: errorIn);
+      print(
+          '****************************** error ******************************');
     } else if (data != null) {
       developer.log(data, time: DateTime.now(), name: label);
     }
@@ -70,5 +74,13 @@ class Utility {
     DateTime now = tz.TZDateTime.now(detroit);
     log("$currentTimeZone $now");
     return now;
+  }
+
+  static String utf8convert(String text) {
+    try {
+      return utf8.fuse(base64).decode(Uri.decodeFull(text));
+    } catch (e) {
+      return text;
+    }
   }
 }

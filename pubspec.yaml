@@ -16,9 +16,9 @@ dependencies:
   shared_preferences: ^2.2.0
 
   #Network
-  dio: ^5.3.0
+  dio: ^5.3.2
   url_launcher: ^6.1.12
-  connectivity_plus: ^4.0.1
+  connectivity_plus: ^4.0.2
   flutter_html: ^3.0.0-alpha.6
 
   #State Management
@@ -32,11 +32,11 @@ dependencies:
   intl: ^0.18.0
 
   #Animation
-  lottie: ^2.5.0
+  lottie: ^2.6.0
 
   #Images
   flutter_svg: ^2.0.7
-  image_picker: ^1.0.1
+  image_picker: ^1.0.2
 
   #Firebase
   firebase_messaging: ^14.6.5

@@ -1,10 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
-
+import 'package:base/utility/route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:base/main.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:developer' as developer;
@@ -20,9 +20,12 @@ void cprint(
 }) {
   if (kDebugMode) {
     if (errorIn != null) {
-      print('****************************** error ******************************');
-      developer.log('[Error]', time: DateTime.now(), error: data, name: errorIn);
-      print('****************************** error ******************************');
+      print(
+          '****************************** error ******************************');
+      developer.log('[Error]',
+          time: DateTime.now(), error: data, name: errorIn);
+      print(
+          '****************************** error ******************************');
     } else if (data != null) {
       developer.log(data, time: DateTime.now(), name: label);
     }
@@ -70,5 +73,13 @@ class Utility {
     DateTime now = tz.TZDateTime.now(detroit);
     log("$currentTimeZone $now");
     return now;
+  }
+
+  static String utf8convert(String text) {
+    try {
+      return utf8.fuse(base64).decode(Uri.decodeFull(text));
+    } catch (e) {
+      return text;
+    }
   }
 }

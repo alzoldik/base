@@ -2,12 +2,9 @@ import 'package:base/utility/extintions.dart';
 import 'package:base/utility/keybord_lisenter.dart';
 import 'package:base/utility/route.dart';
 import 'package:base/widgets/custom_text_field.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import '../../../../utility/utility.dart';
 import '../../../../widgets/custom_btn.dart';
 import '../../../../widgets/lottie.dart';
-import '../../otp/view/otp_view.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -69,10 +66,7 @@ class LoginView extends StatelessWidget {
                     child: CustomBtn(
                       text: context.L.login,
                       onPressed: () {
-                        FirebaseMessaging.instance.getToken().then(
-                              (value) => cprint(value),
-                            );
-                        push(const OtpView());
+                        pushNamed(Routes.otp);
                       },
                     ),
                   ),

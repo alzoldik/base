@@ -9,7 +9,7 @@ abstract class SettingsService {
 
   set themeLightMode(bool value);
 
-  bool get isArabic;
+  int get langIndex;
 
-  set isArabic(bool value);
+  set langIndex(int value);
 }

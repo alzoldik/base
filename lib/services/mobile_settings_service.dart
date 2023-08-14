@@ -24,10 +24,10 @@ class MobileSettingsService extends SettingsService {
   set themeLightMode(bool value) => _sharedPreferences.setBool('theme', value);
 
   @override
-  bool get isArabic => (_sharedPreferences.getBool('isArabic') ?? false);
+  int get langIndex => (_sharedPreferences.getInt('langIndex') ?? 0);
 
   @override
-  set isArabic(bool value) => _sharedPreferences.setBool('isArabic', value);
+  set langIndex(int value) => _sharedPreferences.setInt('langIndex', value);
 
   @override
   late AppSettings settings;

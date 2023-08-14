@@ -1,6 +1,6 @@
+import 'package:base/utility/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../main.dart';
 
 extension StringEx on String {
   String takeOnly(int value) {
@@ -10,7 +10,8 @@ extension StringEx on String {
     return this;
   }
 
-  String forWeb({required bool web}) => web ? replaceFirst('assets/', '') : this;
+  String forWeb({required bool web}) =>
+      web ? replaceFirst('assets/', '') : this;
 
   String get removeSpaces {
     if (length > 0) {
@@ -19,7 +20,10 @@ extension StringEx on String {
     return this;
   }
 
-  bool get isPhone => RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$').hasMatch(this) && (length > 8 || length <= 10);
+  bool get isPhone =>
+      RegExp(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')
+          .hasMatch(this) &&
+      (length > 8 || length <= 10);
 
   bool isNumeric() {
     for (int i = 0; i < length; i++) {
@@ -38,7 +42,8 @@ extension StringEx on String {
 
   bool get isEnglish => RegExp('[a-zA-Z]').hasMatch(this);
 
-  TextDirection get textDirection => RegExp('[a-zA-Z]').hasMatch(this) ? TextDirection.ltr : TextDirection.rtl;
+  TextDirection get textDirection =>
+      RegExp('[a-zA-Z]').hasMatch(this) ? TextDirection.ltr : TextDirection.rtl;
 }
 
 extension NumEx on int {
@@ -51,7 +56,8 @@ extension NumEx on int {
 extension WidgetEx on Widget {
   Widget ripple(
     Function? onPressed, {
-    BorderRadiusGeometry borderRadius = const BorderRadius.all(Radius.circular(5)),
+    BorderRadiusGeometry borderRadius =
+        const BorderRadius.all(Radius.circular(5)),
   }) =>
       InkWell(
         onTap: onPressed?.call(),
@@ -87,7 +93,8 @@ extension WidgetEx on Widget {
     double horizontal = 0.0,
   }) =>
       Padding(
-        padding: EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal),
+        padding:
+            EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal),
         child: this,
       );
 
@@ -114,6 +121,8 @@ extension ContextEX on BuildContext {
 }
 
 extension ScreenScale on num {
-  double get w => MediaQuery.of(navigator.currentContext!).size.width * (toDouble() / 390);
-  double get h => MediaQuery.of(navigator.currentContext!).size.height * (toDouble() / 844);
+  double get w =>
+      MediaQuery.of(navigator.currentContext!).size.width * (toDouble() / 390);
+  double get h =>
+      MediaQuery.of(navigator.currentContext!).size.height * (toDouble() / 844);
 }

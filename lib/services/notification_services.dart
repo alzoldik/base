@@ -1,95 +1,160 @@
+import 'dart:async';
 import 'dart:convert';
-
-import 'package:base/utility/route.dart';
-import 'package:base/utility/utility.dart';
+import 'dart:io';
+import 'dart:math' as math;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import '../utility/utility.dart';
 
-import '../feature/main_page.dart';
-
-Future<void> handelBackgroundMessage(RemoteMessage remoteMessage) async {
-  cprint("title: ${remoteMessage.notification?.title}");
-  cprint("title: ${remoteMessage.notification?.body}");
-  cprint("title: ${remoteMessage.data}");
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  await NotificationServices().initPushNot();
+  NotificationServices().setUpFirebase();
+  _not = message.data;
+  NotificationServices().pushLocalNotification(
+    message.notification?.title ?? "",
+    message.notification?.body ?? "",
+  );
+  cprint("Handling a background message: ${message.notification?.toMap()}");
 }
 
+Map<String, dynamic> _not = {};
+
 class NotificationServices {
-  final _firebaseMessaging = FirebaseMessaging.instance;
-  final channel = const AndroidNotificationChannel(
-    'high_importance_channel',
-    'channel_name',
-    description: 'channel_description',
-    importance: Importance.defaultImportance,
-  );
-  final _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  Future<void> init() async {
-    await _firebaseMessaging.requestPermission();
-    final token = await _firebaseMessaging.getToken();
-    cprint('FirebaseMessaging token: $token', event: 'FirebaseMessaging');
-    initPushNot();
-  }
-
-  Future initPushNot() async {
-    await _firebaseMessaging.setForegroundNotificationPresentationOptions(
+  static FirebaseMessaging? _firebaseMessaging;
+  static FlutterLocalNotificationsPlugin? _notificationsPlugin;
+  Future<void> setUpFirebase() async {
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    _firebaseMessaging = FirebaseMessaging.instance;
+    _firebaseMessaging?.setAutoInitEnabled(true);
+    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
       sound: true,
     );
-    FirebaseMessaging.instance.getInitialMessage().then(handelMessage);
-    FirebaseMessaging.onMessageOpenedApp.listen(handelMessage);
+
+    _notificationsPlugin = FlutterLocalNotificationsPlugin();
+    if (Platform.isIOS) {
+      _notificationsPlugin
+          ?.resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin>()!
+          .requestPermissions(
+            alert: true,
+            badge: true,
+            sound: true,
+          );
+    }
+    var android = const AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    var initSetting = InitializationSettings(
+      android: android,
+      iOS: const DarwinInitializationSettings(
+        defaultPresentAlert: true,
+        defaultPresentBadge: true,
+        defaultPresentSound: true,
+      ),
+    );
+    _notificationsPlugin?.initialize(
+      initSetting,
+      onDidReceiveNotificationResponse: onSelectNotification,
+    );
+    firebaseCloudMessagingListeners();
+  }
+
+  Future<void> firebaseCloudMessagingListeners() async {
+    iOSPermission();
+    await getToken();
     FirebaseMessaging.onMessage.listen(
-      (message) {
-        final notification = message.notification;
-        if (notification == null) return;
-        _flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title != null ? utf8convert(notification.title!) : "",
-          notification.body != null ? utf8convert(notification.body!) : "",
-          const NotificationDetails(
-            android: AndroidNotificationDetails(
-              'high_importance_channel',
-              'channel_name',
-              channelDescription: 'channel_description',
-              icon: "@mipmap/ic_launcher",
-            ),
-            iOS: DarwinNotificationDetails(
-              presentAlert: true,
-              presentBadge: true,
-              presentSound: true,
-            ),
-          ),
-          payload: jsonEncode(message.toMap()),
-        );
+      (RemoteMessage data) {
+        _not = data.data;
+        cprint('on Message data ${data.data}');
+        cprint('on Message ${jsonEncode(data.notification?.toMap())}');
+        if (Platform.isAndroid) {
+          pushLocalNotification(
+            data.notification?.title ?? "",
+            data.notification?.body ?? "",
+          );
+        }
+      },
+    );
+
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (RemoteMessage data) {
+        cprint('on Opened ${data.data}');
+        _not = data.data;
+        handlePathByRoute(data.data);
+      },
+    );
+
+    _notificationsPlugin?.getNotificationAppLaunchDetails().then(
+      (
+        NotificationAppLaunchDetails? data,
+      ) {
+        cprint(
+            'on Opened From Notification ${data!.notificationResponse?.payload}');
+        if (data.notificationResponse?.payload != null) handlePathByRoute(_not);
       },
     );
   }
 
-  Future initLocalNote() async {
-    const ios = DarwinInitializationSettings();
-    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
-    const initSet = InitializationSettings(iOS: ios, android: android);
-    _flutterLocalNotificationsPlugin.initialize(
-      initSet,
-      onDidReceiveNotificationResponse: (v) {},
-      onDidReceiveBackgroundNotificationResponse: (details) {},
+  static Future<String> getToken() async {
+    String? deviceToken = '';
+    try {
+      deviceToken = await _firebaseMessaging?.getToken();
+    } catch (e) {
+      cprint("$e");
+    }
+    cprint("TOKEN: $deviceToken");
+    return deviceToken ?? "";
+  }
+
+  void iOSPermission() => _firebaseMessaging?.requestPermission(
+        announcement: true,
+        carPlay: true,
+        sound: true,
+        badge: true,
+        alert: true,
+      );
+
+  Future<void> handlePathByRoute(Map<String, dynamic> dataMap) async {
+    cprint("data map $dataMap");
+  }
+
+  void onSelectNotification(NotificationResponse? payload) async {
+    cprint(payload.toString());
+    handlePathByRoute(_not);
+  }
+
+  Future<void> getInitialMessage() async {
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (value) {
+        if (value != null) {
+          _not = value.data;
+          handlePathByRoute(value.data);
+        }
+      },
     );
   }
 
-  void handelMessage(RemoteMessage? data) {
-    if (data != null) {
-      push(MainPage(title: data.notification?.title ?? ""));
-    }
-  }
-
-  String utf8convert(String text) {
-    try {
-      return utf8.fuse(base64).decode(Uri.decodeFull(text));
-    } catch (e) {
-      return text;
-    }
+  pushLocalNotification(String title, String subtitle) async {
+    var rng = math.Random();
+    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+      'high_importance_channel',
+      'channel_name',
+      importance: Importance.high,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+    var platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: const DarwinNotificationDetails(),
+    );
+    await _notificationsPlugin?.show(
+      rng.nextInt(100000),
+      Utility.utf8convert(title),
+      Utility.utf8convert(subtitle),
+      platformChannelSpecifics,
+      payload: 'item x',
+    );
   }
 }

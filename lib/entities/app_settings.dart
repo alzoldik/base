@@ -3,29 +3,29 @@ class AppSettings implements Copyable<AppSettings> {
   final bool lightTheme;
 
   /// The current locale name.
-  final bool isArabic;
+  final int langIndex;
 
   AppSettings({
     required this.lightTheme,
-    required this.isArabic,
+    required this.langIndex,
   });
 
   AppSettings.sensibleDefaults()
       : lightTheme = true,
-        isArabic = true;
+        langIndex = 0;
 
   @override
-  AppSettings copy({bool? lightTheme, bool? isArabic}) {
+  AppSettings copy({bool? lightTheme, int? langIndex}) {
     return AppSettings(
       lightTheme: lightTheme ?? this.lightTheme,
-      isArabic: isArabic ?? this.isArabic,
+      langIndex: langIndex ?? this.langIndex,
     );
   }
 
   @override
   AppSettings copyWith(AppSettings appSettings) => AppSettings(
         lightTheme: appSettings.lightTheme,
-        isArabic: appSettings.isArabic,
+        langIndex: appSettings.langIndex,
       );
 }
 

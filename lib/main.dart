@@ -1,10 +1,9 @@
 import 'package:base/app/app_state.dart';
 import 'package:base/entities/app_settings.dart';
-import 'package:base/feature/intro/view/light_splash.dart';
 import 'package:base/services/notification_services.dart';
 import 'package:base/utility/keybord_lisenter.dart';
+import 'package:base/utility/route.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -12,24 +11,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:base/utility/un_focus.dart';
 import 'bloc/setting/setting_bloc.dart';
+import 'config/consts.dart';
 import 'config/themes/themes.dart';
-import 'feature/intro/view/dark_splash.dart';
 import 'services/mobile_settings_service.dart';
-
-final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await NotificationServices().init();
-  FirebaseMessaging.onBackgroundMessage(handelBackgroundMessage);
+  await NotificationServices().setUpFirebase();
   await dotenv.load();
   var mobileSettingsService = await MobileSettingsService.instance();
-  runApp(
-    MyApp(
-      mobileSettingsService: mobileSettingsService,
-    ),
-  );
+  runApp(MyApp(mobileSettingsService: mobileSettingsService));
 }
 
 class MyApp extends StatelessWidget {
@@ -55,30 +47,27 @@ class MyApp extends StatelessWidget {
                   showSemanticsDebugger: false,
                   debugShowMaterialGrid: false,
                   navigatorKey: navigator,
-                  locale: snapshot.data?.isArabic == true
-                      ? const Locale('ar', 'EG')
-                      : const Locale('en', 'US'),
+                  locale:
+                      Consts.supportedLocales[snapshot.data?.langIndex ?? 0],
                   localizationsDelegates: const [
                     AppLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
-                  supportedLocales: const [
-                    Locale('ar', 'EG'),
-                    Locale('en', 'US'),
-                  ],
+                  supportedLocales: Consts.supportedLocales,
                   title: 'HCM7',
                   onGenerateTitle: (context) =>
-                      AppLocalizations.of(context)!.app_title,
+                      AppLocalizations.of(context)?.app_title ?? "",
                   darkTheme: Themes.darkTheme().themeData,
                   theme: Themes.lightTheme().themeData,
                   themeMode: snapshot.data?.lightTheme == true
                       ? ThemeMode.light
                       : ThemeMode.dark,
-                  home: snapshot.data?.lightTheme == true
-                      ? const LightSplash()
-                      : const DarkSplash(),
+                  initialRoute: snapshot.data?.lightTheme == true
+                      ? Routes.lightSplash.name
+                      : Routes.darkSplash.name,
+                  routes: routes,
                   builder: (context, child) {
                     return MediaQuery(
                       data: MediaQuery.of(context).copyWith(

@@ -1,9 +1,72 @@
+import 'package:base/feature/auth/login/view/login.dart';
+import 'package:base/feature/auth/otp/view/otp_view.dart';
+import 'package:base/feature/auth/singup/view/signup.dart';
+import 'package:base/feature/home/view/home_view.dart';
+import 'package:base/feature/intro/view/dark_splash.dart';
+import 'package:base/feature/main_page.dart';
+import 'package:base/feature/notification/view/notification_view.dart';
 import 'package:flutter/material.dart';
-import 'package:base/main.dart';
+import '../feature/intro/view/light_splash.dart';
+import '../feature/intro/view/onbording.dart';
 
-push(Widget child) async => Navigator.of(navigator.currentContext!).push(
-      CustomPageRoute(builder: (context) => child),
+final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
+
+enum Routes {
+  lightSplash,
+  darkSplash,
+  onBording,
+  home,
+  login,
+  signup,
+  otp,
+  mainPage,
+  forgetPassword,
+  profile,
+  changePassword,
+  changeLanguage,
+  profileEdit,
+  chat,
+}
+
+Map<String, Widget Function(BuildContext)> routes = <String, WidgetBuilder>{
+  Routes.lightSplash.name: (context) => const LightSplash(),
+  Routes.darkSplash.name: (context) => const DarkSplash(),
+  Routes.onBording.name: (context) => const OnBording(),
+  Routes.home.name: (context) => const HomeView(),
+  Routes.login.name: (context) => const LoginView(),
+  Routes.signup.name: (context) => const SignUpView(),
+  Routes.otp.name: (context) => const OtpView(),
+  Routes.mainPage.name: (context) => const MainPage(),
+  Routes.profile.name: (context) => const ProfileView(),
+};
+
+pushNamed(
+  Routes route, {
+  arguments,
+  bool replace = false,
+  bool clean = false,
+}) async {
+  if (clean) {
+    return await navigator.currentState!.pushNamedAndRemoveUntil(
+      route.name,
+      (_) => false,
+      arguments: arguments,
     );
+  } else if (replace) {
+    return await navigator.currentState!.pushReplacementNamed(
+      route.name,
+      arguments: arguments,
+    );
+  } else {
+    return await navigator.currentState!.pushNamed(
+      route.name,
+      arguments: arguments,
+    );
+  }
+}
+
+push(Widget child) async => Navigator.of(navigator.currentContext!)
+    .push(CustomPageRoute(builder: (context) => child));
 
 replacement(Widget child) => Navigator.of(
       navigator.currentContext!,
@@ -22,9 +85,7 @@ pushAndRemoveUntil(Widget child) => Navigator.of(
 
 pushReplacement(Widget child) =>
     Navigator.of(navigator.currentContext!).pushReplacement(
-      CustomPageRoute(
-        builder: (context) => child,
-      ),
+      CustomPageRoute(builder: (context) => child),
     );
 
 pushFade(Widget child) async => Navigator.push(

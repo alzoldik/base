@@ -9,9 +9,9 @@ import '../utility/utility.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  FirebaseNotifications().setUpFirebase();
+  NotificationServices().setUpFirebase();
   _not = message.data;
-  FirebaseNotifications().pushLocalNotification(
+  NotificationServices().pushLocalNotification(
     message.notification?.title ?? "",
     message.notification?.body ?? "",
   );
@@ -20,7 +20,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Map<String, dynamic> _not = {};
 
-class FirebaseNotifications {
+class NotificationServices {
   static FirebaseMessaging? _firebaseMessaging;
   static FlutterLocalNotificationsPlugin? _notificationsPlugin;
   Future<void> setUpFirebase() async {

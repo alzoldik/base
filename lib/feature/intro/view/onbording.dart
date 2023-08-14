@@ -1,6 +1,5 @@
 import 'package:base/bloc/setting/setting_bloc.dart';
 import 'package:base/entities/app_settings.dart';
-import 'package:base/feature/auth/login/view/login.dart';
 import 'package:base/utility/extintions.dart';
 import 'package:base/utility/route.dart';
 import 'package:base/widgets/custom_btn.dart';
@@ -76,17 +75,20 @@ class OnBording extends StatelessWidget {
                     child: CustomBtn(
                       text: context.L.get_start,
                       onPressed: () {
-                        push(const LoginView());
+                        pushNamed(Routes.login);
                       },
                     ),
                   ),
                   SizedBox(height: 16.h),
                   GestureDetector(
                     onTap: () {
-                      context.read<SettingsBloc>().isArabic(!context
-                          .read<SettingsBloc>()
-                          .currentSettings
-                          .isArabic);
+                      context.read<SettingsBloc>().langIndex(context
+                                  .read<SettingsBloc>()
+                                  .currentSettings
+                                  .langIndex ==
+                              0
+                          ? 1
+                          : 0);
                     },
                     child: Text(
                       context.L.language,

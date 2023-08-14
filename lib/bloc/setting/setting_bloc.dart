@@ -8,13 +8,14 @@ import '../../services/setting_services.dart';
 class SettingsBloc extends Bloc<AppEvent, AppState> {
   final SettingsService _settingsService;
 
-  final BehaviorSubject<AppSettings> _settings = BehaviorSubject<AppSettings>.seeded(AppSettings.sensibleDefaults());
+  final BehaviorSubject<AppSettings> _settings =
+      BehaviorSubject<AppSettings>.seeded(AppSettings.sensibleDefaults());
   final BehaviorSubject<bool> _darkMode = BehaviorSubject<bool>();
-  final BehaviorSubject<bool> _isArabic = BehaviorSubject<bool>();
+  final BehaviorSubject<int> _langIndex = BehaviorSubject<int>();
 
   void Function(bool) get darkMode => _darkMode.add;
 
-  void Function(bool) get isArabic => _isArabic.add;
+  void Function(int) get langIndex => _langIndex.add;
 
   void Function(AppSettings) get updateSetting => _settings.add;
 
@@ -30,7 +31,7 @@ class SettingsBloc extends Bloc<AppEvent, AppState> {
     updateSetting(
       AppSettings(
         lightTheme: _settingsService.themeLightMode,
-        isArabic: _settingsService.isArabic,
+        langIndex: _settingsService.langIndex,
       ),
     );
     _darkMode.listen(
@@ -39,10 +40,10 @@ class SettingsBloc extends Bloc<AppEvent, AppState> {
         updateSetting(currentSettings.copy(lightTheme: lightModel));
       },
     );
-    _isArabic.listen(
-      (bool isArabic) {
-        _settingsService.isArabic = isArabic;
-        updateSetting(currentSettings.copy(isArabic: isArabic));
+    _langIndex.listen(
+      (int langIndex) {
+        _settingsService.langIndex = langIndex;
+        updateSetting(currentSettings.copy(langIndex: langIndex));
       },
     );
   }
@@ -50,7 +51,7 @@ class SettingsBloc extends Bloc<AppEvent, AppState> {
   @override
   Future<void> close() {
     _darkMode.close();
-    _isArabic.close();
+    _langIndex.close();
     _settings.close();
     return super.close();
   }

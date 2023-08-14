@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../../utility/route.dart';
 import '../../../../widgets/custom_btn.dart';
 import '../../../../widgets/pin_code.dart';
-import '../../singup/view/signup.dart';
 
 class OtpView extends StatelessWidget {
   const OtpView({super.key});
@@ -41,7 +40,7 @@ class OtpView extends StatelessWidget {
             CustomBtn(
               text: "Verify",
               onPressed: () {
-                push(const SignUpView());
+                pushNamed(Routes.signup);
               },
             )
           ],

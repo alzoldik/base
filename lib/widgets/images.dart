@@ -8,11 +8,13 @@ class Images extends StatelessWidget {
     this.height,
     this.width,
     this.fit = BoxFit.contain,
+    this.color,
   });
   final String image;
   final double? height;
   final double? width;
   final BoxFit fit;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,8 @@ class Images extends StatelessWidget {
           height: height,
           width: width,
           fit: fit,
+          colorFilter:
+              color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
         );
       case "png":
         return Image.asset(

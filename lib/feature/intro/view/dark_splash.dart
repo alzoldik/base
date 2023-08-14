@@ -6,7 +6,6 @@ import 'package:base/widgets/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/splash_bloc.dart';
-import 'onbording.dart';
 
 class DarkSplash extends StatelessWidget {
   const DarkSplash({super.key});
@@ -20,7 +19,7 @@ class DarkSplash extends StatelessWidget {
         child: BlocListener<SplashBloc, AppState>(
           listener: (context, state) {
             if (state is Done) {
-              pushAndRemoveUntil(const OnBording());
+              pushNamed(Routes.onBording);
             }
           },
           child: Padding(

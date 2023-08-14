@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:base/utility/route.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
-import 'package:base/main.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:developer' as developer;

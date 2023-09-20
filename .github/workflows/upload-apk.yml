@@ -45,11 +45,11 @@ jobs:
 
       - name: Upload APK to GitHub Releases
         id: upload-release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v1
         with:
           files: |
             app-release.apk
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GIT_TOKEN }}
 
   send:
     needs: upload

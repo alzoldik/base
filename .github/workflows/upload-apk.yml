@@ -1,0 +1,52 @@
+name: Build and Send APK
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v10
+        with:
+          flutter-version: '2.5.0' # Adjust to your Flutter version
+
+      - name: Build APK
+        run: |
+          flutter clean
+          flutter build apk --release
+
+      - name: Archive APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+  send:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Download APK
+        uses: actions/download-artifact@v2
+        with:
+          name: release-apk
+          path: .
+
+      - name: Send APK via Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -F chat_id=$TELEGRAM_CHAT_ID -F document=@app-release.apk "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument"
+

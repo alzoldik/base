@@ -35,8 +35,8 @@ jobs:
     steps:
       - name: Create Git tag
         run: |
-          git tag -a v2.0 -m "Version 1.0"  # Replace with your desired tag name and message
-          git push origin v1.0
+          git tag -a v1 -m "Version 1"  # Replace with your desired tag name and message
+          git push origin v1
 
   upload:
     needs: tag

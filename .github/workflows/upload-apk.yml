@@ -43,11 +43,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: upload
+        id: upload_apk
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
+
       - name: Upload Artifact to Transfer.sh
         id: upload_artifact
         run: |
           UPLOAD_URL=$(curl --upload-file build/app/outputs/flutter-apk/app-release.apk https://transfer.sh/app-release.apk)
           echo "::set-output name=upload_url::$UPLOAD_URL"
+          
       - name: Send APK URL via Telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}

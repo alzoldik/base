@@ -35,12 +35,6 @@ jobs:
         run: |
           UPLOAD_URL=$(curl --upload-file build/app/outputs/flutter-apk/app-release.apk https://transfer.sh/app-release.apk)
           echo "::set-output name=upload_url::$UPLOAD_URL"
- 
-  send:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Send APK URL via Telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -49,6 +43,21 @@ jobs:
         run: |
           MESSAGE="Here's the Flutter APK release: $UPLOAD_URL"
           curl -s "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" -d "chat_id=$TELEGRAM_CHAT_ID" -d "text=$MESSAGE"
+
+ 
+  # send:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Send APK URL via Telegram
+  #       env:
+  #         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+  #         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          
+  #       run: |
+  #         MESSAGE="Here's the Flutter APK release: $UPLOAD_URL"
+  #         curl -s "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" -d "chat_id=$TELEGRAM_CHAT_ID" -d "text=$MESSAGE"
 
 # name: Build and Send APK
 

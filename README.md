@@ -16,7 +16,7 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 
-## Github action 
+## Github action with Telegram bot
 
 Creating a GitHub workflow to build a Flutter APK release and send it to a Telegram user involves several steps. Here's a simplified example of how you can achieve this using GitHub Actions:
 

@@ -30,7 +30,7 @@ Creating a GitHub workflow to build a Flutter APK release and send it to a Teleg
    - `TELEGRAM_BOT_TOKEN`: Your Telegram Bot Token.
    - `TELEGRAM_CHAT_ID`: The Chat ID of the user you want to send the APK to user specified.
 
-5. **GitHub Workflow YAML**: Create a `.github/workflows/build_and_send_apk.yml` file in your repository to send apk url with custom message to telegram user with the following content:
+5. **GitHub Workflow YAML For Send URL**: Create a `.github/workflows/build_and_send_apk.yml` file in your repository to send apk url with custom message to telegram user with the following content:
 
 ```yaml
 name: Build and Send APK
@@ -81,7 +81,7 @@ jobs:
           curl -s "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendMessage" -d "chat_id=$TELEGRAM_CHAT_ID" -d "text=$MESSAGE"
 
 ```
-5. **GitHub Workflow YAML**: Create a `.github/workflows/build_and_send_apk.yml` file in your repository to send apk file to telegram user with the following content:
+6. **GitHub Workflow YAML For Upload File**: Create a `.github/workflows/build_and_send_apk.yml` file in your repository to send apk file to telegram user with the following content:
 
 ```yaml
 

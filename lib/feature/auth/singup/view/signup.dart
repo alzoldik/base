@@ -1,4 +1,5 @@
 import 'package:base/feature/auth/singup/widget/schools.dart';
+import 'package:base/feature/main_page.dart';
 import 'package:base/utility/extintions.dart';
 import 'package:base/widgets/app_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -150,10 +151,7 @@ class _SignUpViewState extends State<SignUpView> {
                 child: CustomBtn(
                   text: "Sign Up",
                   onPressed: () {
-                    pushNamed(
-                      Routes.mainPage,
-                      clean: true,
-                    );
+                    pushAndRemoveUntil(const MainPage());
                   },
                 ),
               ),

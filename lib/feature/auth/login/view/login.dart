@@ -1,3 +1,4 @@
+import 'package:base/feature/auth/otp/view/otp_view.dart';
 import 'package:base/utility/extintions.dart';
 import 'package:base/utility/keybord_lisenter.dart';
 import 'package:base/utility/route.dart';
@@ -66,7 +67,7 @@ class LoginView extends StatelessWidget {
                     child: CustomBtn(
                       text: context.L.login,
                       onPressed: () {
-                        pushNamed(Routes.otp);
+                        push(const OtpView());
                       },
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:base/app/app_event.dart';
 import 'package:base/app/app_state.dart';
+import 'package:base/feature/intro/view/onbording.dart';
 import 'package:base/utility/extintions.dart';
 import 'package:base/utility/route.dart';
 import 'package:base/widgets/lottie.dart';
@@ -19,7 +20,7 @@ class LightSplash extends StatelessWidget {
         child: BlocListener<SplashBloc, AppState>(
           listener: (context, state) {
             if (state is Done) {
-              pushNamed(Routes.onBording);
+              push(const OnBording());
             }
           },
           child: Padding(

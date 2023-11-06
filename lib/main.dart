@@ -1,9 +1,8 @@
 import 'package:base/app/app_state.dart';
 import 'package:base/entities/app_settings.dart';
-import 'package:base/services/notification_services.dart';
+import 'package:base/feature/intro/view/light_splash.dart';
 import 'package:base/utility/keybord_lisenter.dart';
 import 'package:base/utility/route.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -17,8 +16,8 @@ import 'services/mobile_settings_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await NotificationServices().setUpFirebase();
+  // await Firebase.initializeApp();
+  // await NotificationServices().setUpFirebase();
   await dotenv.load();
   var mobileSettingsService = await MobileSettingsService.instance();
   runApp(MyApp(mobileSettingsService: mobileSettingsService));
@@ -64,10 +63,11 @@ class MyApp extends StatelessWidget {
                   themeMode: snapshot.data?.lightTheme == true
                       ? ThemeMode.light
                       : ThemeMode.dark,
-                  initialRoute: snapshot.data?.lightTheme == true
-                      ? Routes.lightSplash.name
-                      : Routes.darkSplash.name,
-                  routes: routes,
+                  // initialRoute: snapshot.data?.lightTheme == true
+                  //     ? Routes.lightSplash.name
+                  //     : Routes.darkSplash.name,
+                  // routes: routes,
+                  home: const LightSplash(),
                   builder: (context, child) {
                     return MediaQuery(
                       data: MediaQuery.of(context).copyWith(

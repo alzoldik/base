@@ -1,3 +1,4 @@
+import 'package:base/feature/auth/singup/view/signup.dart';
 import 'package:base/utility/extintions.dart';
 import 'package:flutter/material.dart';
 import '../../../../utility/route.dart';
@@ -40,7 +41,7 @@ class OtpView extends StatelessWidget {
             CustomBtn(
               text: "Verify",
               onPressed: () {
-                pushNamed(Routes.signup);
+                push(const SignUpView());
               },
             )
           ],

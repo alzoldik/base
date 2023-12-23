@@ -2,11 +2,10 @@ import 'package:base/feature/auth/login/view/login.dart';
 import 'package:base/feature/auth/otp/view/otp_view.dart';
 import 'package:base/feature/auth/singup/view/signup.dart';
 import 'package:base/feature/home/view/home_view.dart';
-import 'package:base/feature/intro/view/dark_splash.dart';
 import 'package:base/feature/main_page.dart';
 import 'package:base/feature/notification/view/notification_view.dart';
 import 'package:flutter/material.dart';
-import '../feature/intro/view/light_splash.dart';
+import '../feature/intro/view/splash.dart';
 import '../feature/intro/view/onbording.dart';
 
 final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
@@ -29,15 +28,14 @@ enum Routes {
 }
 
 Map<String, Widget Function(BuildContext)> routes = <String, WidgetBuilder>{
-  Routes.lightSplash.name: (context) => const LightSplash(),
-  Routes.darkSplash.name: (context) => const DarkSplash(),
+  Routes.lightSplash.name: (context) => const Splash(),
   Routes.onBording.name: (context) => const OnBording(),
   Routes.home.name: (context) => const HomeView(),
   Routes.login.name: (context) => const LoginView(),
   Routes.signup.name: (context) => const SignUpView(),
   Routes.otp.name: (context) => const OtpView(),
   Routes.mainPage.name: (context) => const MainPage(),
-  Routes.profile.name: (context) => const ProfileView(),
+  Routes.profile.name: (context) => const NotificationView(),
 };
 
 pushNamed(
@@ -154,7 +152,8 @@ class CustomPageTransitionBuilder extends PageTransitionsBuilder {
 
 class CustomPageRoute extends MaterialPageRoute {
   @override
-  Duration get transitionDuration => const Duration(milliseconds: 1000);
+  Duration get transitionDuration => const Duration(milliseconds: 800);
 
-  CustomPageRoute({builder}) : super(builder: builder);
+  CustomPageRoute({Widget Function(BuildContext)? builder})
+      : super(builder: builder!);
 }

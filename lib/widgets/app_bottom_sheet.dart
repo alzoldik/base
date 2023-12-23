@@ -1,8 +1,9 @@
+import 'package:base/utility/route.dart';
 import 'package:flutter/material.dart';
 
 Future<dynamic> showAppBottomSheet<T>({
-  required BuildContext context,
   required Widget widget,
+  bool isScrollControlled = false,
 }) {
   return showModalBottomSheet(
     shape: const RoundedRectangleBorder(
@@ -12,8 +13,8 @@ Future<dynamic> showAppBottomSheet<T>({
       ),
     ),
     backgroundColor: Colors.white,
-    isScrollControlled: true,
-    context: context,
+    isScrollControlled: isScrollControlled,
+    context: navigator.currentContext!,
     builder: (context) => widget,
   );
 }

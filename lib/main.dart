@@ -1,5 +1,6 @@
 import 'package:base/app/app_state.dart';
 import 'package:base/entities/app_settings.dart';
+import 'package:base/feature/intro/view/splash.dart';
 import 'package:base/services/notification_services.dart';
 import 'package:base/utility/keybord_lisenter.dart';
 import 'package:base/utility/route.dart';
@@ -61,18 +62,12 @@ class MyApp extends StatelessWidget {
                       AppLocalizations.of(context)?.app_title ?? "",
                   darkTheme: Themes.darkTheme().themeData,
                   theme: Themes.lightTheme().themeData,
-                  themeMode: snapshot.data?.lightTheme == true
-                      ? ThemeMode.light
-                      : ThemeMode.dark,
-                  initialRoute: snapshot.data?.lightTheme == true
-                      ? Routes.lightSplash.name
-                      : Routes.darkSplash.name,
-                  routes: routes,
+                  home: const Splash(),
                   builder: (context, child) {
                     return MediaQuery(
                       data: MediaQuery.of(context).copyWith(
-                        textScaleFactor:
-                            (1 * (MediaQuery.of(context).size.height / 844)),
+                        textScaler: TextScaler.linear(
+                            1 * (MediaQuery.of(context).size.height / 812)),
                         alwaysUse24HourFormat: false,
                       ),
                       child: Unfocus(child: child),

@@ -51,10 +51,9 @@ class _SignUpViewState extends State<SignUpView> {
                         onChanged: (p0) {},
                       ),
                       SizedBox(height: 16.h),
-                      GestureDetector(
+                      CustomTextField(
                         onTap: () {
                           showAppBottomSheet(
-                            context: context,
                             widget: SizedBox(
                               height: context.h / 1.5,
                               width: double.infinity,
@@ -71,20 +70,17 @@ class _SignUpViewState extends State<SignUpView> {
                             ),
                           );
                         },
-                        child: CustomTextField(
-                          hint: city ?? "City",
-                          enabled: false,
-                          suffixIcon: const Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            size: 30,
-                          ),
+                        hint: city ?? "City",
+                        readOnly: true,
+                        suffixIcon: const Icon(
+                          Icons.keyboard_arrow_down_outlined,
+                          size: 30,
                         ),
                       ),
                       SizedBox(height: 16.h),
-                      GestureDetector(
+                      CustomTextField(
                         onTap: () {
                           showAppBottomSheet(
-                            context: context,
                             widget: SizedBox(
                               height: context.h / 1.5,
                               width: double.infinity,
@@ -101,20 +97,17 @@ class _SignUpViewState extends State<SignUpView> {
                             ),
                           );
                         },
-                        child: CustomTextField(
-                          hint: school ?? "School",
-                          enabled: false,
-                          suffixIcon: const Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            size: 30,
-                          ),
+                        hint: school ?? "School",
+                        readOnly: true,
+                        suffixIcon: const Icon(
+                          Icons.keyboard_arrow_down_outlined,
+                          size: 30,
                         ),
                       ),
                       SizedBox(height: 16.h),
-                      GestureDetector(
+                      CustomTextField(
                         onTap: () {
                           showAppBottomSheet(
-                            context: context,
                             widget: SizedBox(
                               height: context.h / 1.5,
                               width: double.infinity,
@@ -131,13 +124,11 @@ class _SignUpViewState extends State<SignUpView> {
                             ),
                           );
                         },
-                        child: CustomTextField(
-                          hint: subject ?? "Subject",
-                          enabled: false,
-                          suffixIcon: const Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            size: 30,
-                          ),
+                        hint: subject ?? "Subject",
+                        readOnly: true,
+                        suffixIcon: const Icon(
+                          Icons.keyboard_arrow_down_outlined,
+                          size: 30,
                         ),
                       ),
                       SizedBox(height: 16.h),

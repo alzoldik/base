@@ -13,12 +13,12 @@ dependencies:
     sdk: flutter
 
   #Local Storage
-  shared_preferences: ^2.2.0
+  shared_preferences: ^2.2.2
 
   #Network
-  dio: ^5.3.2
-  url_launcher: ^6.1.12
-  connectivity_plus: ^4.0.2
+  dio: ^5.4.0
+  url_launcher: ^6.2.2
+  connectivity_plus: ^5.0.2
   flutter_html: ^3.0.0-alpha.6
 
   #State Management
@@ -26,27 +26,27 @@ dependencies:
   flutter_bloc: ^8.1.3
 
   #pick files
-  file_picker: ^5.3.3
+  file_picker: ^6.1.1
 
   #Localization
   intl: ^0.18.0
 
   #Animation
-  lottie: ^2.6.0
+  lottie: ^2.7.0
 
   #Images
-  flutter_svg: ^2.0.7
-  image_picker: ^1.0.2
+  flutter_svg: ^2.0.9
+  image_picker: ^1.0.5
 
   #Firebase
-  firebase_messaging: ^14.6.5
-  flutter_local_notifications: ^15.1.0+1
-  firebase_core: ^2.15.0
-  firebase_analytics: ^10.4.4
+  firebase_messaging: ^14.7.9
+  flutter_local_notifications: ^16.2.0
+  firebase_core: ^2.24.2
+  firebase_analytics: ^10.7.4
 
   #Ui
-  fluttertoast: ^8.2.2
-  cupertino_icons: ^1.0.5
+  fluttertoast: ^8.2.4
+  cupertino_icons: ^1.0.6
   pin_code_fields: ^8.0.1
 
   #timezones
@@ -66,7 +66,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.2
+  flutter_lints: ^3.0.1
 
 flutter:
   generate: true 
@@ -82,6 +82,7 @@ flutter:
     - assets/svgs/intro/
     - assets/svgs/chat/
     - assets/json/
+    - assets/images/
     - .env
 
 

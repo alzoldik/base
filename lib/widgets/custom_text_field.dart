@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:base/utility/extintions.dart';
 import '../utility/keybord_lisenter.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -13,13 +13,17 @@ class CustomTextField extends StatefulWidget {
     this.textInputAction,
     this.onChanged,
     this.suffixIcon,
-    this.enabled = true,
-    this.maxLines = 10,
+    this.readOnly = false,
+    this.maxLines = 1,
     this.minLines = 1,
     this.hintWidget,
     this.inputFormatters,
+    this.prefixIcon,
+    this.onTap,
+    this.init,
   });
   final String? hint;
+  final String? init;
   final Widget? hintWidget;
   final TextEditingController? controller;
   final bool? isPassword;
@@ -27,10 +31,12 @@ class CustomTextField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final Function(String)? onChanged;
   final Widget? suffixIcon;
-  final bool enabled;
+  final Widget? prefixIcon;
+  final bool readOnly;
   final int maxLines;
   final int minLines;
   final List<TextInputFormatter>? inputFormatters;
+  final Function()? onTap;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -59,7 +65,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: _focus,
-      enabled: widget.enabled,
+      initialValue: widget.init,
       minLines: widget.minLines,
       maxLines: widget.maxLines,
       controller: widget.controller,
@@ -67,15 +73,28 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       onChanged: widget.onChanged,
-      inputFormatters: widget.keyboardType == TextInputType.number ||
-              widget.keyboardType == TextInputType.phone
-          ? <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly,
-            ]
-          : widget.inputFormatters, // Only numbers can be entered
+      onTap: widget.onTap,
+      readOnly: widget.readOnly,
+      validator: widget.keyboardType == TextInputType.emailAddress
+          ? (value) {
+              bool valeditEmail = !(value?.isEmail ?? false);
+              if (valeditEmail) {
+                return "";
+              }
+              return null;
+            }
+          : null,
+      inputFormatters: <TextInputFormatter>[
+        if (widget.keyboardType == TextInputType.number ||
+            widget.keyboardType == TextInputType.phone) ...[
+          FilteringTextInputFormatter.digitsOnly,
+        ],
+        if (widget.inputFormatters != null) ...widget.inputFormatters!
+      ], // Only numbers can be entered
       decoration: InputDecoration(
         hintText: widget.hint,
         suffixIcon: widget.suffixIcon,
+        prefixIcon: widget.prefixIcon,
       ),
     );
   }

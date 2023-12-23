@@ -1,6 +1,5 @@
 import 'package:base/utility/extintions.dart';
 import 'package:flutter/material.dart';
-import '../../../widgets/custom_btn.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -11,21 +10,16 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(title: const Text('Home Page')),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomBtn(
-              text: "New Student",
-              onPressed: () {},
-            ),
-            SizedBox(height: 32.h),
-            CustomBtn(
-              text: "My Students",
-              onPressed: () {},
-              color: context.theme.canvasColor,
-              textColor: context.theme.primaryColor,
-            ),
-          ],
+        child: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Home Page",
+              )
+            ],
+          ),
         ),
       ),
     );
